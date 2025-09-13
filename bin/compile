@@ -111,7 +111,7 @@ while IFS= read -r PACKAGE; do
     # on a single line due to how the download command was implemented so we
     # should respect that behavior since users are doing this
     IFS=$' \t' read -ra PACKAGE_NAMES <<< "$PACKAGE"
-    apt-get "${APT_OPTIONS[@]}" -y "${APT_FORCE_YES[@]}" -d install --reinstall "${PACKAGE_NAMES[@]}" | indent
+    apt-get "${APT_OPTIONS[@]}" -y "${APT_FORCE_YES[@]}" -d install --reinstall "${PACKAGE_NAMES[@]}" --allow-unauthenticated | indent
   fi
 done < <(grep --invert-match -e "^\s*#" -e "^\s*$" -e "^:repo:" "${BUILD_DIR}/Aptfile")
 
